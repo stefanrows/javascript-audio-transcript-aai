@@ -22,13 +22,12 @@ const getTranscript = async () => {
   const checkCompletionInterval = setInterval(async () => {
     const transcript = await assembly.get(`/transcript/${response.data.id}`)
     const transcriptStatus = transcript.data.status
-    let transcriptText = ""
 
     if (transcriptStatus !== "completed") {
       console.log(`Transcript Status: ${transcriptStatus}`)
     } else if (transcriptStatus === "completed") {
       console.log("\nTranscription completed!\n")
-      transcriptText = transcript.data.text
+      let transcriptText = transcript.data.text
       console.log(`Your transcribed text:\n\n${transcriptText}`)
       clearInterval(checkCompletionInterval)
     }
